@@ -2,7 +2,29 @@
 
 **Réponse Automatisée Fondée sur l'Intelligence documentaire et la Qualité experte**
 
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![FastAPI](https://img.shields.io/badge/backend-FastAPI-009688)
+![Status](https://img.shields.io/badge/status-in%20development-yellow)
+![License](https://img.shields.io/badge/license-internal-lightgrey)
+
 A grounded, human-validated RAG system for administrative Q&A, built for the *Ministère de la Transition Numérique* (Morocco). RAFIQ answers recurring administrative questions with cited, source-grounded responses, routes uncertain cases to human experts instead of guessing, learns from every expert validation, and produces signable Word/PDF correspondence from the final answer.
+
+---
+
+## Table of contents
+
+- [Why RAFIQ](#why-rafiq)
+- [Key features](#key-features)
+- [Architecture](#architecture)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Quick start](#quick-start)
+- [API reference](#api-reference)
+- [Data](#data)
+- [Evaluation](#evaluation)
+- [Roadmap](#roadmap)
+- [License](#license)
 
 ---
 
@@ -221,6 +243,10 @@ uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 
 See `DECISIONS.md` for the reasoning behind each technical trade-off made along the way.
 
+## Contributing
+
+This is a capstone (PFA) project developed under academic and ministerial supervision. Issues and suggestions are welcome via the repository's issue tracker; external pull requests are not being accepted at this stage.
+
 ## License
 
-PFA project — internal use, Ministère de la Transition Numérique.
+PFA project — internal use, Ministère de la Transition Numérique. No public license is granted at this time.
