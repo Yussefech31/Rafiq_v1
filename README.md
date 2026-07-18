@@ -232,14 +232,34 @@ uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 `eval/` contains a hand-annotated test question set (`test_questions.csv`) and `run_eval.py`, which reports:
 - citation/grounding accuracy
 - abstention correctness (abstains when it should, answers when it should)
-- precedent reuse rate over time (a direct measure of the capitalization loop working)
+- regime accuracy (matches `expected_regime` in CSV)
+- precedent reuse rate (regime=high — direct measure of the capitalization loop)
+- per-language breakdown (FR / AR)
+
+**Seed expert Q&A precedents** (required before testing HIGH reuse):
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.seed_qa
+```
+
+Demo questions that should route to **HIGH** regime after seeding:
+- FR: *Quels sont les documents nécessaires pour obtenir un certificat de résidence ?*
+- FR: *Comment renouveler le passeport biométrique ?*
+- AR: *ما هي الوثائق المطلوبة للحصول على شهادة السكنى؟*
+- AR: *كيف يمكن تجديد جواز السفر البيومتري؟*
+
+Run evaluation (API must be running, valid `ANTHROPIC_API_KEY` in `.env`):
+
+```powershell
+.\.venv\Scripts\python.exe -m eval.run_eval
+```
 
 ## Roadmap
 
 - [x] **Phase 1** — Single-memory RAG: ingestion, indexing, grounded generation with citations
-- [ ] **Phase 2** — Double memory (`qa_store`), confidence scoring, abstention
-- [ ] **Phase 3** — Validation workflow, `qa_store` writeback, document generation, frontend
-- [ ] **Phase 4** — Evaluation, hardening, polish
+- [x] **Phase 2** — Double memory (`qa_store`), confidence scoring, abstention
+- [x] **Phase 3** — Validation workflow, `qa_store` writeback, document generation, frontend
+- [x] **Phase 4** — Evaluation, hardening, polish
 
 See `DECISIONS.md` for the reasoning behind each technical trade-off made along the way.
 

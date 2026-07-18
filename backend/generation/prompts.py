@@ -70,10 +70,13 @@ def build_generate_prompt(question: str, results: list[Any]) -> str:
 
 def build_reuse_prompt(question: str, qa_match: Any, results: list[Any]) -> str:
     """Build the reuse prompt with precedent info and complementary context."""
+    precedent_answer = qa_match.metadata.get(
+        "validated_answer", qa_match.text
+    )
     return REUSE_PROMPT.format(
         question=question,
         precedent_question=qa_match.metadata.get("question", ""),
-        precedent_answer=qa_match.text,
+        precedent_answer=precedent_answer,
         precedent_id=qa_match.chunk_id,
         context=format_context(
             [r for r in results if r.chunk_id != qa_match.chunk_id]

@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     # Confidence thresholds
     confidence_high_threshold: float = 0.85
     confidence_low_threshold: float = 0.55
+    qa_match_threshold: float = 0.72  # raw cosine similarity for precedent reuse
 
     # Fusion weights
     qa_store_weight: float = 0.6

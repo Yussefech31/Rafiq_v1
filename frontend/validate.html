@@ -545,6 +545,15 @@
         const answer = getParam('answer');
         const confidence = getParam('confidence');
         const regime = getParam('regime');
+        let sources = [];
+        try {
+            const sourcesParam = getParam('sources');
+            if (sourcesParam) {
+                sources = JSON.parse(sourcesParam);
+            }
+        } catch (e) {
+            sources = [];
+        }
 
         const questionEl = document.getElementById('originalQuestion');
         const answerEl = document.getElementById('originalAnswer');
@@ -594,9 +603,9 @@
                         validated_answer: validatedAnswer,
                         validator_name: validatorName,
                         generate_document: generateDoc,
-                        original_confidence: parseFloat(confidence) || 0,
-                        original_regime: regime || '',
-                        sources: [],
+                        confidence: parseFloat(confidence) || 0,
+                        regime: regime || 'medium',
+                        sources: sources,
                     }),
                 });
 

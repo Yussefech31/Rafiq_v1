@@ -2,7 +2,6 @@
 backend.retrieval.fuse
 ~~~~~~~~~~~~~~~~~~~~~~
 Fusion pondérée des résultats des deux stores.
-Phase 1 (stub) : encapsule uniquement les résultats docs dans un FusedResult.
 Phase 2 : fusion pondérée favorisant qa_store sur les correspondances proches.
 """
 
@@ -20,13 +19,14 @@ def fuse_results(
 ) -> FusedResult:
     """
     Fuse results from docs_store and qa_store.
-    Phase 1: only uses docs_results (qa_results will be empty).
-    Phase 2: weighted fusion favoring qa_store on close matches.
+
+    Weighted scores are used only for ranking merged results.
+    Raw (unweighted) scores drive confidence and qa_match detection.
     """
     settings = get_settings()
     all_results: list[SearchResult] = []
 
-    # Weight and merge results
+    # Weight and merge results (ranking only)
     for r in docs_results:
         all_results.append(
             SearchResult(
@@ -36,7 +36,7 @@ def fuse_results(
                 source_id=r.source_id,
                 title=r.title,
                 collection="docs",
-                metadata=r.metadata,
+                metadata={**r.metadata, "raw_score": r.score},
             )
         )
     for r in qa_results:
@@ -48,25 +48,24 @@ def fuse_results(
                 source_id=r.source_id,
                 title=r.title,
                 collection="qa",
-                metadata=r.metadata,
+                metadata={**r.metadata, "raw_score": r.score},
             )
         )
 
-    # Sort by weighted score descending
     all_results.sort(key=lambda x: x.score, reverse=True)
 
-    # Find best QA match (if any)
+    # Best QA match based on raw similarity
     qa_match = None
     if qa_results:
         best_qa = max(qa_results, key=lambda x: x.score)
-        if best_qa.score >= settings.confidence_high_threshold:
+        if best_qa.score >= settings.qa_match_threshold:
             qa_match = best_qa
 
-    # Compute agreement: how similar are top-3 scores
-    top_scores = (
-        [r.score for r in all_results[:3]] if all_results else [0.0]
-    )
-    top_score = top_scores[0] if top_scores else 0.0
+    # Confidence from raw scores across both stores
+    raw_scores = [r.score for r in docs_results] + [r.score for r in qa_results]
+    raw_scores.sort(reverse=True)
+    top_scores = raw_scores[:3] if raw_scores else [0.0]
+    top_score = top_scores[0]
     agreement = (
         1.0 - (max(top_scores) - min(top_scores))
         if len(top_scores) > 1
