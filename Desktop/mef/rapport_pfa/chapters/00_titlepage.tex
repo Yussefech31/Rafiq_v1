@@ -1,0 +1,127 @@
+%==========================================================
+%  CHAPITRE 00 — PAGE DE GARDE OFFICIELLE
+%  Inclus depuis main.tex via \include{chapters/00_titlepage}
+%==========================================================
+\begin{titlepage}
+\thispagestyle{empty}
+
+% Couche TikZ pour les éléments graphiques de fond
+\begin{tikzpicture}[remember picture, overlay]
+  % Bandeau supérieur bleu foncé
+  \fill[ChapBlue]
+    (current page.north west) rectangle
+    ([yshift=-4.5cm] current page.north east);
+  % Liseré accent
+  \fill[AccentBlue]
+    ([yshift=-4.5cm] current page.north west) rectangle
+    ([yshift=-4.8cm] current page.north east);
+  % Barre latérale gauche
+  \fill[ChapBlue!15]
+    (current page.south west) rectangle
+    ([xshift=0.7cm] current page.north west);
+  % Bandeau bas
+  \fill[ChapBlue]
+    (current page.south west) rectangle
+    ([yshift=2cm] current page.south east);
+  \fill[AccentBlue]
+    ([yshift=2cm] current page.south west) rectangle
+    ([yshift=2.3cm] current page.south east);
+\end{tikzpicture}
+
+%──────────────────────────────────────────────
+%  LOGOS (en-tête)
+%──────────────────────────────────────────────
+\vspace*{0.3cm}
+\begin{minipage}[t]{0.45\textwidth}
+  \hspace{0.8cm}
+  \begin{minipage}[c]{0.85\textwidth}
+    \placeholder{Logo École\\(figures/logo\_school.png)}
+    % \includegraphics[height=2.0cm]{figures/logo_school}
+  \end{minipage}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedleft
+  \placeholder{Logo Entreprise\\(figures/logo\_company.png)}
+  % \includegraphics[height=2.0cm]{figures/logo_company}
+\end{minipage}
+
+\vspace{2cm}
+
+%──────────────────────────────────────────────
+%  TITRE PRINCIPAL
+%──────────────────────────────────────────────
+\begin{center}
+  {\sffamily\Large\bfseries\color{ChapBlue}
+    Rapport de Projet de Fin d'Année}\\[0.3cm]
+  {\sffamily\normalsize\color{SecGrey}
+    Stage Professionnel — \AcademicYear}
+
+  \vspace{1.2cm}
+
+  \begin{tcolorbox}[
+    enhanced, width=13cm,
+    colback=ChapBlue, colframe=AccentBlue,
+    arc=6pt, fontupper=\sffamily\bfseries\large,
+    halign=center, valign=center,
+    top=12pt, bottom=12pt
+  ]
+    \textcolor{white}{\ProjectTitle}
+  \end{tcolorbox}
+
+  \vspace{0.8cm}
+  {\color{SecGrey}\sffamily\normalsize
+    \CompanyName\ — \CompanyCity}
+\end{center}
+
+\vspace{1.5cm}
+
+%──────────────────────────────────────────────
+%  IDENTITÉ ÉTUDIANT
+%──────────────────────────────────────────────
+\begin{center}
+  \begin{tcolorbox}[
+    enhanced, width=12cm,
+    colback=LightBg, colframe=ChapBlue,
+    title={\sffamily\bfseries Réalisé par},
+    attach boxed title to top left={xshift=10pt,yshift=-4pt},
+    boxed title style={colback=ChapBlue,colframe=ChapBlue}
+  ]
+    \begin{center}
+      {\large\bfseries\color{ChapBlue} \StudentName}\\[4pt]
+      {\color{SecGrey} \StudentField\ — \StudentYear}
+    \end{center}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1.2cm}
+
+%──────────────────────────────────────────────
+%  ENCADRANTS
+%──────────────────────────────────────────────
+\begin{center}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \multicolumn{2}{c}{\sffamily\bfseries\color{ChapBlue} Encadrement} \\
+    \midrule
+    {\sffamily\bfseries\color{SecGrey} Encadrant professionnel :}
+      & {\color{ChapBlue} \SupervisorPro} \\[4pt]
+    {\sffamily\bfseries\color{SecGrey} Encadrant académique :}
+      & {\color{ChapBlue} \SupervisorAca} \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\vfill
+
+%──────────────────────────────────────────────
+%  PIED DE GARDE
+%──────────────────────────────────────────────
+\begin{center}
+  {\color{white}\sffamily\small
+    \SchoolName\ \guillemotright\ Année universitaire \AcademicYear
+    \guillemotright\ \SubmissionDate}
+\end{center}
+
+\end{titlepage}
+\clearpage

@@ -1,0 +1,214 @@
+%==========================================================
+%  CHAPITRE 3 — ANALYSE ET CONCEPTION
+%==========================================================
+\chapter{Analyse et conception}
+\label{chap:conception}
+
+%──────────────────────────────────────────────────────────
+\section{Méthodologie de développement}
+\label{sec:cpt:methodologie}
+%──────────────────────────────────────────────────────────
+
+\todo{Décrire la méthodologie adoptée (Scrum, Kanban, Cycle en V,
+RUP, etc.) avec ses artefacts, ses rôles et ses rituels.}
+
+\subsection{Processus Scrum}
+
+\begin{center}
+% Schéma simplifié du cycle Scrum
+\begin{tikzpicture}[
+  node distance=1.5cm,
+  box/.style={
+    rectangle, rounded corners=5pt,
+    fill=ChapBlue!12, draw=ChapBlue,
+    font=\sffamily\footnotesize\bfseries, text=ChapBlue,
+    minimum width=2.8cm, minimum height=0.85cm,
+    align=center
+  },
+  arrow/.style={-{Stealth[length=5pt]}, thick, draw=AccentBlue}
+]
+  \node[box, fill=ChapBlue, text=white] (PB)  {Product\\Backlog};
+  \node[box, right=of PB]               (SP)  {Sprint\\Planning};
+  \node[box, right=of SP]               (SB)  {Sprint\\Backlog};
+  \node[box, right=of SB]               (DEV) {Sprint\\(2 sem.)};
+  \node[box, right=of DEV]              (REV) {Sprint\\Review};
+  \node[box, below=of DEV]              (RET) {Rétrospective};
+
+  \draw[arrow] (PB) -- (SP);
+  \draw[arrow] (SP) -- (SB);
+  \draw[arrow] (SB) -- (DEV);
+  \draw[arrow] (DEV) -- (REV);
+  \draw[arrow] (REV) -- ++(0,-1.2) -| (SP);
+  \draw[arrow] (DEV) -- (RET);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l l p{7cm}}
+  \toprule
+  \textbf{Artéfact / Rôle} & \textbf{Responsable} & \textbf{Description} \\
+  \midrule
+  Product Backlog & \todo{Product Owner} & Liste priorisée de toutes les user stories \\
+  Sprint Backlog  & Équipe              & Sélection de stories à réaliser dans le sprint \\
+  Daily Standup   & Équipe              & Réunion quotidienne de 15 min \\
+  Sprint Review   & Équipe + Stakeholders & Démo de l'incrément livré \\
+  Rétrospective   & Équipe + Scrum Master & Amélioration continue du processus \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Diagrammes UML}
+\label{sec:cpt:uml}
+%──────────────────────────────────────────────────────────
+
+\subsection{Diagramme de cas d'utilisation}
+
+\placeholder{Diagramme de cas d'utilisation global\\
+(à insérer dans figures/usecase.png ou à générer avec PlantUML)}
+
+La figure~\ref{fig:usecase} présente les interactions entre les
+différents acteurs et le système.
+
+\begin{figure}[H]
+  \centering
+  \placeholder{Diagramme de cas d'utilisation — figures/usecase.png}
+  % \includegraphics[width=0.85\textwidth]{figures/usecase}
+  \caption{Diagramme de cas d'utilisation global}
+  \label{fig:usecase}
+\end{figure}
+
+\todo{Commenter chaque groupe de cas d'utilisation en précisant
+l'acteur concerné et le déclencheur de l'interaction.}
+
+\subsection{Diagramme de classes}
+
+\begin{figure}[H]
+  \centering
+  \placeholder{Diagramme de classes — figures/class\_diagram.png}
+  % \includegraphics[width=0.9\textwidth]{figures/class_diagram}
+  \caption{Diagramme de classes du domaine}
+  \label{fig:classes}
+\end{figure}
+
+\todo{Décrire les principales entités (classes), leurs attributs,
+leurs méthodes et leurs relations (association, agrégation,
+composition, héritage).}
+
+\subsection{Diagramme de séquence — Scénario principal}
+
+\begin{figure}[H]
+  \centering
+  \placeholder{Diagramme de séquence — scénario principal\\
+               (figures/sequence\_main.png)}
+  % \includegraphics[width=0.9\textwidth]{figures/sequence_main}
+  \caption{Diagramme de séquence : \todo{Nom du scénario principal}}
+  \label{fig:sequence}
+\end{figure}
+
+\todo{Expliquer le déroulement du scénario illustré.}
+
+\subsection{Diagramme d'activité}
+
+\begin{figure}[H]
+  \centering
+  \placeholder{Diagramme d'activité — figures/activity.png}
+  % \includegraphics[width=0.75\textwidth]{figures/activity}
+  \caption{Diagramme d'activité : \todo{Nom du processus métier}}
+  \label{fig:activity}
+\end{figure}
+
+%──────────────────────────────────────────────────────────
+\section{Architecture technique}
+\label{sec:cpt:architecture}
+%──────────────────────────────────────────────────────────
+
+\subsection{Architecture globale}
+
+\todo{Décrire l'architecture retenue (monolithique, microservices,
+MVC, hexagonale, événementielle…) et justifier ce choix.}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=1.4cm and 2.2cm,
+    layer/.style={
+      rectangle, rounded corners=6pt,
+      draw=#1, fill=#1!10,
+      font=\sffamily\small\bfseries, text=#1,
+      minimum width=4cm, minimum height=1cm,
+      align=center
+    },
+    arrow/.style={-{Stealth[length=5pt]}, thick, draw=SecGrey}
+  ]
+    % Couches
+    \node[layer=AccentBlue]               (frontend)  {Frontend\\(\todo{React / Angular})};
+    \node[layer=ChapBlue, below=of frontend]  (backend)
+                                                 {Backend API\\(\todo{Spring Boot / FastAPI})};
+    \node[layer=SecGrey,  below=of backend]   (db)
+                                                 {Base de données\\(\todo{PostgreSQL / MongoDB})};
+    % Côté
+    \node[layer=WarningOrange, right=3cm of backend] (ext)
+                                                 {Services externes\\(\todo{Email, OAuth, S3})};
+    % Flèches
+    \draw[arrow] (frontend) -- node[right,font=\tiny\sffamily]{REST/HTTP} (backend);
+    \draw[arrow] (backend)  -- node[right,font=\tiny\sffamily]{JDBC/ORM}  (db);
+    \draw[arrow] (backend)  -- node[above,font=\tiny\sffamily]{API calls} (ext);
+  \end{tikzpicture}
+  \caption{Architecture en couches du système}
+  \label{fig:architecture}
+\end{figure}
+
+\subsection{Architecture de base de données}
+
+\todo{Présenter le schéma de la base de données (MCD / MLD) ou décrire
+les collections si NoSQL.}
+
+\begin{figure}[H]
+  \centering
+  \placeholder{Schéma entité-relation / MLD — figures/db\_schema.png}
+  % \includegraphics[width=0.9\textwidth]{figures/db_schema}
+  \caption{Schéma de la base de données}
+  \label{fig:db}
+\end{figure}
+
+\subsection{Description des composants principaux}
+
+\begin{description}[leftmargin=0pt]
+  \item[\textcolor{ChapBlue}{\sffamily\bfseries Module A — \todo{Nom}}]
+    \todo{Décrire le rôle, les responsabilités et les interfaces
+    exposées par ce module.}
+
+  \item[\textcolor{ChapBlue}{\sffamily\bfseries Module B — \todo{Nom}}]
+    \todo{Décrire le rôle, les responsabilités et les interfaces
+    exposées par ce module.}
+
+  \item[\textcolor{ChapBlue}{\sffamily\bfseries Module C — \todo{Nom}}]
+    \todo{Décrire le rôle, les responsabilités et les interfaces
+    exposées par ce module.}
+\end{description}
+
+%──────────────────────────────────────────────────────────
+\section{Modélisation des données}
+\label{sec:cpt:donnees}
+%──────────────────────────────────────────────────────────
+
+\todo{Si applicable, décrire les principales entités du domaine,
+leur modélisation en base de données et les règles de gestion associées.}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l >{\ttfamily}l l l}
+  \toprule
+  \textbf{Entité} & \textbf{Table} & \textbf{Clé primaire} & \textbf{Description} \\
+  \midrule
+  \todo{Utilisateur} & \todo{users}    & id (UUID)  & \todo{Description} \\
+  \todo{Commande}    & \todo{orders}   & id (SERIAL)& \todo{Description} \\
+  \todo{Produit}     & \todo{products} & id (SERIAL)& \todo{Description} \\
+  \todo{Entité 4}    & \todo{table\_4} & id         & \todo{Description} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\clearpage

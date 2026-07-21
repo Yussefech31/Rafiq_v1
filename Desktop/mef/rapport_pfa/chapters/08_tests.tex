@@ -1,0 +1,181 @@
+%==========================================================
+%  CHAPITRE 5 — TESTS ET RÉSULTATS
+%==========================================================
+\chapter{Tests et résultats}
+\label{chap:tests}
+
+%──────────────────────────────────────────────────────────
+\section{Stratégie de tests}
+\label{sec:tests:strategie}
+%──────────────────────────────────────────────────────────
+
+\todo{Décrire la stratégie de tests adoptée : quels types de tests,
+à quel niveau, par qui et avec quels outils.}
+
+La pyramide de tests suivante illustre la répartition adoptée :
+
+\begin{center}
+\begin{tikzpicture}
+  % Pyramide de tests
+  \fill[ChapBlue!80]   (0,0)   -- (6,0)   -- (3,1.5) -- cycle;
+  \fill[AccentBlue!60] (0.8,1.5)-- (5.2,1.5)-- (3,3)   -- cycle;
+  \fill[WarningOrange!50](1.8,3) -- (4.2,3)  -- (3,4.5) -- cycle;
+
+  % Labels
+  \node[font=\sffamily\small\bfseries, text=white] at (3,0.7)
+    {Tests Unitaires (\todo{ex: JUnit 5, pytest})};
+  \node[font=\sffamily\small\bfseries, text=white] at (3,2.25)
+    {Tests d'Intégration (\todo{Testcontainers, REST-assured})};
+  \node[font=\sffamily\footnotesize\bfseries, text=white] at (3,3.75)
+    {Tests E2E\\(\todo{Cypress / Selenium})};
+
+  % Annotations côté droit
+  \node[right, font=\sffamily\footnotesize, text=SecGrey] at (6.2,0.7)
+    {\todo{~120 tests}};
+  \node[right, font=\sffamily\footnotesize, text=SecGrey] at (6.2,2.25)
+    {\todo{~30 tests}};
+  \node[right, font=\sffamily\footnotesize, text=SecGrey] at (6.2,3.75)
+    {\todo{~10 scénarios}};
+\end{tikzpicture}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Tests unitaires}
+\label{sec:tests:unitaires}
+%──────────────────────────────────────────────────────────
+
+\subsection{Outillage}
+
+\begin{itemize}
+  \item \tech{\todo{JUnit 5}} — Framework de tests unitaires
+  \item \tech{\todo{Mockito}} — Mock des dépendances
+  \item \tech{\todo{JaCoCo}} — Mesure de la couverture de code
+\end{itemize}
+
+\subsection{Exemple de test unitaire}
+
+\begin{lstlisting}[
+  language=Java,
+  caption={Test unitaire : \todo{Cas de test — ex : OrderServiceTest}},
+  label={lst:unit-test}
+]
+// [A COMPLETER]
+@ExtendWith(MockitoExtension.class)
+class OrderServiceTest {
+
+    @Mock private OrderRepository orderRepository;
+    @Mock private InventoryClient inventoryClient;
+
+    @InjectMocks private OrderService orderService;
+
+    @Test
+    @DisplayName("Devrait lever une exception si le stock est insuffisant")
+    void createOrder_shouldThrow_whenStockInsufficient() {
+        // Arrange
+        CreateOrderRequest req = new CreateOrderRequest("PROD-01", 100);
+        when(inventoryClient.checkStock("PROD-01", 100)).thenReturn(false);
+
+        // Act & Assert
+        assertThrows(
+            InsufficientStockException.class,
+            () -> orderService.createOrder(req)
+        );
+        verify(orderRepository, never()).save(any());
+    }
+}
+\end{lstlisting}
+
+\subsection{Résultats de couverture}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l r r r}
+  \toprule
+  \textbf{Module / Package}   & \textbf{Lignes} & \textbf{Couvertes} & \textbf{Taux} \\
+  \midrule
+  \todo{service}              & \todo{320}  & \todo{275}  & \todo{85,9\%} \\
+  \todo{repository}           & \todo{80}   & \todo{65}   & \todo{81,3\%} \\
+  \todo{controller}           & \todo{150}  & \todo{110}  & \todo{73,3\%} \\
+  \todo{model}                & \todo{200}  & \todo{190}  & \todo{95,0\%} \\
+  \midrule
+  \textbf{Total}              & \todo{750}  & \todo{640}  & \textbf{\todo{85,3\%}} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Tests d'intégration}
+\label{sec:tests:integration}
+%──────────────────────────────────────────────────────────
+
+\todo{Décrire les tests d'intégration : périmètre testé (API REST,
+base de données, services externes), outils (Testcontainers, WireMock,
+Postman/Newman) et principaux résultats.}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l c c c}
+  \toprule
+  \textbf{Scénario}              & \textbf{Méthode HTTP} & \textbf{Code attendu} & \textbf{Résultat} \\
+  \midrule
+  Créer une commande valide      & POST   & 201 Created    & \textcolor{green!60!black}{\bfseries PASS} \\
+  Commande avec stock insuffisant& POST   & 422 Unprocessable & \textcolor{green!60!black}{\bfseries PASS} \\
+  Récupérer une commande existante & GET  & 200 OK         & \textcolor{green!60!black}{\bfseries PASS} \\
+  Commande introuvable           & GET    & 404 Not Found  & \textcolor{green!60!black}{\bfseries PASS} \\
+  Supprimer sans droits          & DELETE & 403 Forbidden  & \textcolor{orange}{\bfseries WARN} \\
+  \todo{Scénario 6}              & \todo{} & \todo{}       & \todo{} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Tests end-to-end (E2E)}
+\label{sec:tests:e2e}
+%──────────────────────────────────────────────────────────
+
+\todo{Décrire les tests E2E : scénarios testés (parcours utilisateur
+complets), outil (Cypress, Selenium, Playwright), rapport d'exécution.}
+
+\placeholder{Rapport d'exécution Cypress / Selenium — figures/e2e\_report.png}
+
+%──────────────────────────────────────────────────────────
+\section{Tests de performance}
+\label{sec:tests:performance}
+%──────────────────────────────────────────────────────────
+
+\todo{Si des tests de charge ont été réalisés (JMeter, k6, Gatling),
+présenter la configuration et les résultats.}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l r r r r}
+  \toprule
+  \textbf{Endpoint}    & \textbf{VU} & \textbf{Temps moyen (ms)}
+                        & \textbf{P95 (ms)} & \textbf{Erreurs} \\
+  \midrule
+  GET /api/orders      & \todo{50}  & \todo{85}   & \todo{145}  & \todo{0\%} \\
+  POST /api/orders     & \todo{50}  & \todo{195}  & \todo{320}  & \todo{0\%} \\
+  GET /api/dashboard   & \todo{50}  & \todo{250}  & \todo{410}  & \todo{0,2\%} \\
+  \todo{Endpoint 4}    & \todo{}    & \todo{}     & \todo{}     & \todo{} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Synthèse des résultats}
+\label{sec:tests:synthese}
+%──────────────────────────────────────────────────────────
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l l c}
+  \toprule
+  \textbf{KPI}                    & \textbf{Objectif}        & \textbf{Résultat} \\
+  \midrule
+  Couverture de tests             & > 75\%                   & \textcolor{green!60!black}{\bfseries\todo{85,3\%}} \\
+  Temps de réponse P95            & < 400 ms                 & \textcolor{green!60!black}{\bfseries\todo{320 ms}} \\
+  Taux d'erreur en charge         & < 1\%                    & \textcolor{green!60!black}{\bfseries\todo{0,2\%}} \\
+  User stories livrées            & 14/14                    & \textcolor{orange}{\bfseries\todo{12/14}} \\
+  Incidents en recette            & 0 bloquant               & \textcolor{green!60!black}{\bfseries\todo{0}} \\
+  \todo{KPI métier}               & \todo{cible}             & \todo{valeur} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\clearpage

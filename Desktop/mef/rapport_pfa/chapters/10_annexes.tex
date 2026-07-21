@@ -1,0 +1,126 @@
+%==========================================================
+%  CHAPITRE 10 — ANNEXES
+%==========================================================
+\chapter{Annexes}
+\label{chap:annexes}
+
+%──────────────────────────────────────────────────────────
+\section{Annexe A — Cahier des charges détaillé}
+\label{ann:cdc}
+%──────────────────────────────────────────────────────────
+
+\todo{Insérer ici le cahier des charges complet fourni par le maître
+de stage, ou y faire référence si trop volumineux.}
+
+\placeholder{Cahier des charges complet (document PDF joint ou extrait
+— à insérer ici si applicable)}
+
+%──────────────────────────────────────────────────────────
+\section{Annexe B — Glossaire}
+\label{ann:glossaire}
+%──────────────────────────────────────────────────────────
+
+\begin{description}[leftmargin=3cm, style=sameline]
+  \item[\textbf{API}]  \textit{Application Programming Interface} —
+        Interface permettant à deux logiciels de communiquer.
+  \item[\textbf{CI/CD}] \textit{Continuous Integration / Continuous Delivery} —
+        Pratiques DevOps automatisant les phases de build, test et déploiement.
+  \item[\textbf{CRUD}] \textit{Create, Read, Update, Delete} —
+        Les quatre opérations de base sur une base de données.
+  \item[\textbf{DTO}]  \textit{Data Transfer Object} —
+        Objet utilisé pour transporter des données entre les couches
+        d'une application.
+  \item[\textbf{JWT}]  \textit{JSON Web Token} —
+        Standard ouvert pour l'authentification sans état.
+  \item[\textbf{MVC}]  \textit{Model-View-Controller} —
+        Patron architectural séparant la logique métier, la vue et le contrôleur.
+  \item[\textbf{ORM}]  \textit{Object-Relational Mapping} —
+        Technique de correspondance entre objets et tables relationnelles.
+  \item[\textbf{REST}] \textit{Representational State Transfer} —
+        Style architectural pour les services web.
+  \item[\textbf{Scrum}] Cadre Agile de développement itératif basé sur des sprints.
+  \item[\textbf{SLA}]  \textit{Service Level Agreement} —
+        Accord définissant le niveau de service attendu.
+  \item[\textbf{UML}]  \textit{Unified Modeling Language} —
+        Langage de modélisation graphique standardisé.
+  \item[\todo{Terme}]  \todo{Définition}
+\end{description}
+
+%──────────────────────────────────────────────────────────
+\section{Annexe C — Documentation de l'API}
+\label{ann:api}
+%──────────────────────────────────────────────────────────
+
+\todo{Insérer ici la documentation Swagger / OpenAPI des endpoints
+développés, ou un tableau récapitulatif des routes.}
+
+\begin{center}
+\begin{tabular}{>{\ttfamily\footnotesize}l >{\sffamily\footnotesize\bfseries}c
+                >{\footnotesize}l >{\footnotesize}l}
+  \toprule
+  \textbf{Route}              & \textbf{Méthode} & \textbf{Description}
+                                                  & \textbf{Auth} \\
+  \midrule
+  /api/v1/auth/login          & POST   & Authentification   & Non \\
+  /api/v1/auth/refresh        & POST   & Rafraîchir token   & Oui \\
+  /api/v1/\todo{resource}     & GET    & Lister resources   & Oui \\
+  /api/v1/\todo{resource}     & POST   & Créer resource     & Oui \\
+  /api/v1/\todo{resource}/\{id\}& GET  & Lire resource      & Oui \\
+  /api/v1/\todo{resource}/\{id\}& PUT  & Modifier resource  & Oui \\
+  /api/v1/\todo{resource}/\{id\}& DELETE& Supprimer resource & Admin \\
+  \todo{Autres routes}        & \todo{}& \todo{}           & \todo{} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Annexe D — Guide d'installation}
+\label{ann:install}
+%──────────────────────────────────────────────────────────
+
+\subsection{Prérequis}
+
+\begin{itemize}
+  \item \todo{Java 17+ / Python 3.11+ / Node.js 18+}
+  \item \todo{Docker 24.0+} et Docker Compose v2
+  \item \todo{Git 2.40+}
+  \item \todo{Autre prérequis}
+\end{itemize}
+
+\subsection{Étapes d'installation}
+
+\begin{lstlisting}[
+  language={},
+  caption={Commandes d'installation et de lancement},
+  label={lst:install}
+]
+# 1. Cloner le depot
+git clone https://github.com/[A COMPLETER]/[projet].git
+cd [projet]
+
+# 2. Copier la configuration
+cp .env.example .env
+# Editer .env avec vos valeurs (DB, secrets, etc.)
+
+# 3. Lancer avec Docker Compose
+docker compose up --build -d
+
+# 4. Initialiser la base de donnees (si applicable)
+docker compose exec backend [commande de migration]
+
+# 5. Acceder a l'application
+# Frontend : http://localhost:3000
+# API :      http://localhost:8080/api/v1
+# Swagger :  http://localhost:8080/swagger-ui
+\end{lstlisting}
+
+%──────────────────────────────────────────────────────────
+\section{Annexe E — Planning Gantt}
+\label{ann:gantt}
+%──────────────────────────────────────────────────────────
+
+\placeholder{Diagramme de Gantt du projet — figures/gantt.png\\
+(à générer avec MS Project, Excel, GanttProject ou pgfgantt)}
+
+\todo{Commenter le Gantt : jalons importants, tâches critiques,
+marges, décalages par rapport au plan initial.}

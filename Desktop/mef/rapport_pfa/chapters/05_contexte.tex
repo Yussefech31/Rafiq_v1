@@ -1,0 +1,147 @@
+%==========================================================
+%  CHAPITRE 2 — CONTEXTE GÉNÉRAL DU PROJET
+%==========================================================
+\chapter{Contexte général du projet}
+\label{chap:contexte}
+
+%──────────────────────────────────────────────────────────
+\section{Étude de l'existant}
+\label{sec:ctx:existant}
+%──────────────────────────────────────────────────────────
+
+\subsection{Situation actuelle}
+
+\todo{Décrire le système ou le processus existant avant le projet :
+outils utilisés, fonctionnement manuel ou semi-automatisé, acteurs
+impliqués, flux d'information.}
+
+\todo{Si applicable, insérer un schéma du processus existant (diagramme BPMN,
+flowchart) avec \textbackslash placeholder\{...\}.}
+
+\placeholder{Schéma du processus existant (ex : diagramme BPMN, flowchart —
+à insérer dans figures/existant.png)}
+
+\subsection{Limites et problèmes de l'existant}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}p{4cm} p{9cm}}
+  \toprule
+  \textbf{Problème identifié} & \textbf{Impact} \\
+  \midrule
+  \todo{Saisie manuelle}
+    & \todo{Risque d'erreurs, perte de temps (ex : 2h/jour)} \\
+  \todo{Absence de traçabilité}
+    & \todo{Impossible de retrouver l'historique des opérations} \\
+  \todo{Silos de données}
+    & \todo{Données dispersées dans plusieurs fichiers Excel non synchronisés} \\
+  \todo{Scalabilité limitée}
+    & \todo{Le système actuel ne supporte pas une charge > N utilisateurs simultanés} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+%──────────────────────────────────────────────────────────
+\section{Analyse des besoins}
+\label{sec:ctx:besoins}
+%──────────────────────────────────────────────────────────
+
+\subsection{Identification des acteurs}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l l p{7cm}}
+  \toprule
+  \textbf{Acteur} & \textbf{Type} & \textbf{Rôle dans le système} \\
+  \midrule
+  \todo{Administrateur} & Interne & \todo{Gestion des utilisateurs et des droits} \\
+  \todo{Gestionnaire}   & Interne & \todo{Saisie et validation des données métier} \\
+  \todo{Utilisateur}    & Interne & \todo{Consultation des tableaux de bord} \\
+  \todo{Client / API tierce} & Externe & \todo{Déclenchement d'actions via API} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Besoins fonctionnels}
+
+\begin{enumerate}
+  \item \textbf{BF-01 :} \todo{Description du besoin fonctionnel 1.
+        Exemple : Le système doit permettre à un gestionnaire de créer,
+        modifier et supprimer une commande.}
+  \item \textbf{BF-02 :} \todo{Description du besoin fonctionnel 2.}
+  \item \textbf{BF-03 :} \todo{Description du besoin fonctionnel 3.}
+  \item \textbf{BF-04 :} \todo{Description du besoin fonctionnel 4.}
+  \item \textbf{BF-05 :} \todo{Description du besoin fonctionnel 5.}
+  \item \todo{Ajouter d'autres besoins fonctionnels.}
+\end{enumerate}
+
+\subsection{Besoins non fonctionnels}
+
+\begin{itemize}
+  \item \textbf{Performance :} \todo{ex : temps de réponse < 300 ms pour 95\% des requêtes}
+  \item \textbf{Disponibilité :} \todo{ex : SLA 99,5\% (hors maintenance planifiée)}
+  \item \textbf{Sécurité :} \todo{ex : authentification JWT, chiffrement TLS 1.3, RBAC}
+  \item \textbf{Maintenabilité :} \todo{ex : couverture de tests > 75\%, documentation Swagger}
+  \item \textbf{Scalabilité :} \todo{ex : architecture permettant la montée en charge horizontale}
+  \item \textbf{Ergonomie :} \todo{ex : interface responsive, accessible WCAG 2.1 niveau AA}
+\end{itemize}
+
+%──────────────────────────────────────────────────────────
+\section{Cahier des charges}
+\label{sec:ctx:cdc}
+%──────────────────────────────────────────────────────────
+
+\subsection{Périmètre du projet}
+
+\todo{Délimiter précisément ce qui est dans le périmètre (in-scope)
+et hors périmètre (out-of-scope) du projet.}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{X X}
+  \toprule
+  \rowcolor{ChapBlue!10}
+  \textbf{Dans le périmètre (In-scope)} & \textbf{Hors périmètre (Out-of-scope)} \\
+  \midrule
+  \todo{Fonctionnalité A} & \todo{Module existant non touché} \\
+  \todo{Fonctionnalité B} & \todo{Intégration ERP tiers} \\
+  \todo{Fonctionnalité C} & \todo{Application mobile} \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Contraintes du projet}
+
+\begin{itemize}
+  \item \textbf{Contraintes techniques :} \todo{stack imposée, compatibilité
+        avec l'infrastructure existante, langage imposé par l'équipe}
+  \item \textbf{Contraintes temporelles :} \todo{livraison V1 attendue à J+6 semaines}
+  \item \textbf{Contraintes budgétaires :} \todo{utilisation de solutions open-source uniquement}
+  \item \textbf{Contraintes réglementaires :} \todo{conformité RGPD, ISO 27001, etc.}
+\end{itemize}
+
+%──────────────────────────────────────────────────────────
+\section{Solutions étudiées et choix technologiques}
+\label{sec:ctx:solutions}
+%──────────────────────────────────────────────────────────
+
+\todo{Si plusieurs solutions ont été étudiées avant de choisir la
+solution finale, présenter ici le benchmark ou la matrice de décision.}
+
+\begin{center}
+\begin{tabular}{>{\sffamily\bfseries}l c c c c c}
+  \toprule
+  \rowcolor{ChapBlue!10}
+  \textbf{Critère / Solution} & \textbf{Poids}
+    & \textbf{\todo{Sol. A}} & \textbf{\todo{Sol. B}} & \textbf{\todo{Sol. C}}
+    & \textbf{Retenu} \\
+  \midrule
+  Performance   & 30\% & 4/5 & 3/5 & 5/5 & \todo{Sol. C} \\
+  Coût          & 20\% & 5/5 & 3/5 & 4/5 & \\
+  Maintenabilité& 25\% & 3/5 & 5/5 & 4/5 & \\
+  Communauté    & 15\% & 4/5 & 4/5 & 5/5 & \\
+  Intégration   & 10\% & 5/5 & 2/5 & 4/5 & \\
+  \midrule
+  \textbf{Score pondéré} & & \todo{XX} & \todo{XX} & \todo{XX} & \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\clearpage
